@@ -1,0 +1,35 @@
+
+@import url('https://fonts.googleapis.com/css?family=Mali|Nanum+Gothic+Coding&display=swap');
+
+body {
+    background: url("/static/img/stadium.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+h1, h4 {
+    font-family: 'Nanum Gothic Coding', monospace;
+    padding: 4px;
+    text-align: center;
+}
+p {
+    font-family: 'Mali', cursive;
+    padding: 5px;
+}
+.dimensions {
+    max-width: 300px;
+    margin-left: 20px;
+    margin-top: 100px;
+    border-bottom: 0 none;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+    background-color: rgba(0, 0, 0, 0.4); 
+    color: white;
+}
+.dimensions img {
+    width: 300px;
+    height: 250px;
+    padding: 2px;
+}
