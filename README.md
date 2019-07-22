@@ -8,3 +8,7 @@ Starting landing page aka index.html -- Richard
         - pictures of me and Courtney (oval)
         - Description of what project it
     - contact us link
+
+
+todo
+    - add validation 7/21/2019
