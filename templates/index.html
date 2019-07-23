@@ -29,7 +29,7 @@
       <div class="container-fluid">
         <div class="d-flex justify-content-center">
             <h1>Welome to Anything Sports!</h1>
-            <p>by: Richard & Courtney</p>
+            <h4>by: Richard & Courtney</h4>
         </div>
 
 
@@ -38,18 +38,27 @@
             <div class="col-xs-4 dimensions">
                 <h4>Search</h4>
                 <img src="/static/img/search.jpeg" alt="">
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam repellendus tempore magni aperiam in voluptatum suscipit.</p>
+                <p>Search for local fun sports activities near you!</p>
             </div>
             <div class="col-xs-4 dimensions">
                 <h4>Create</h4>
                 <img src="/static/img/create.jpeg" alt="">
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam repellendus tempore magni aperiam in voluptatum suscipit.</p>
+                <p>Cant find what you looking for. Create a pick up game of your favorite sport and see who shows up!</p>
             </div>
             <div class="col-xs-4 dimensions">
                 <h4>Organize</h4>
                 <img src="/static/img/organize.jpeg" alt="">
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam repellendus tempore magni aperiam in voluptatum suscipit.</p>
+                <p>This site makes it easy to organize events with your friends.</p>
             </div>
+        </div>
+        <div>
+                {% with messages = get_flashed_messages() %}     
+                    {% if messages %}                            
+                        {% for message in messages %}            
+                            <p>{{message}}</p>                   
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
         </div>
 
         <!-- Login Form -->
@@ -74,11 +83,11 @@
         <div class="row justify-content-center">
                 <form action="/register" id="regform">
                     <div class="form-group">
-                        <label for="email"><p>First Name:</p></label>
+                        <label for="fname"><p>First Name:</p></label>
                         <input class="form-control" type="text" name="fname" placeholder="John" id="email">
                     </div>
                     <div class="form-group">
-                        <label for="email"> <p>Last Name:</p></label>
+                        <label for="lname"> <p>Last Name:</p></label>
                         <input class="form-control" type="text" name="lname" placeholder="Doe" id="email">
                     </div>
                     <div class="form-group">
@@ -89,11 +98,11 @@
                         <div id="UserNameValidation"></div>
                     </div>
                     <div class="form-group">
-                        <label for="email"><p>Password:</p></label>
+                        <label for="password"><p>Password:</p></label>
                         <input class="form-control" type="text" name="password" placeholder="password?" id="">
                     </div>
                     <div class="form-group">
-                        <label for="password"><p>Confirm Password:</p></label>
+                        <label for="confirm_pass"><p>Confirm Password:</p></label>
                         <input class="form-control" type="text" name="confirm_pass" placeholder="password?" id="password">
                     </div>
                     <div class="row justify-content-center">

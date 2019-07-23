@@ -1,9 +1,14 @@
-from flask import render_template, redirect, request	# we now need fewer imports because we're not doing everything in this file!
+import re
+from flask_bcrypt import Bcrypt  
+from flask import Flask, render_template, redirect, request, flash	# we now need fewer imports because we're not doing everything in this file!
 # if we need to work with the database, we'll need those imports:   
 from config import db
 from models import User, Event #whatever classes we need to import from the model file
 
 
+
+bcrypt = Bcrypt()
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
 
 # home_page
 def home():
@@ -13,12 +18,30 @@ def home():
 
 #  add a user from home page need to add validation
 def add_user():
-
-    new_instance_of_user = User(first_name = request.form['fname'],
-                                 last_name = request.form['lname'],
+    is_valid = True
+    if len(request.form["fname"]) < 2:
+        is_valid = False
+        flash("Please enter a valid first name")
+    if len(request.form["lname"]) < 2:
+        is_valid = False
+        flash("Please enter a valid last name")
+    if not EMAIL_REGEX.match(request.form["email"]):    
+        is_valid = False
+        flash("Invalid email address!")
+    if len(request.form["password"]) < 8:
+        is_valid = False
+        flash("Password should be at least 8 characters")
+    if request.form['password'] != request.form['confirm_pass']:
+        is_valid = False
+        flash("Passwords need to match")
+    if is_valid:
+        pw_hash = bcrypt.generate_password_hash(request.form['password'])
+        new_instance_of_user = User(first_name = request.form['fname'],
+                                    last_name = request.form['lname'],
                                     email = request.form['email'], 
-                                    password = request.form['password'])
-    # if (new_instance_of_user.f)
+                                    password = pw_hash,
+                                    confirm_pass = request.form['confirm_pass'])
+     
     db.session.add(new_instance_of_user)
     db.session.commit()
     return redirect("/")
