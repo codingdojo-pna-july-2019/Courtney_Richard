@@ -23,4 +23,4 @@ class Event(db.Model):
     time = db.Column(db.TIME)
     location = db.Column(db.String(100))
     information = db.Column(db.TEXT)
-    user_id = db.Column(db.Interger, db.ForeignKey('user.id'), nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable = False)
