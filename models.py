@@ -24,3 +24,12 @@ class Event(db.Model):
     location = db.Column(db.String(100))
     information = db.Column(db.TEXT)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable = False)
+
+
+class Message(db.Model):
+    __Tablename__ = "messages"
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.TEXT)
+    created_at = db.Column(db.DateTime, server_default=func.now())
+    updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
+

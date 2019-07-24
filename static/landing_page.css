@@ -21,6 +21,10 @@ p {
     font-family: 'Mali', cursive;
     padding: 5px;
 }
+.errorMSG {
+    color: red;
+    text-align: center;
+}
 .form-group {
     color: whitesmoke;
     font-weight: bold;

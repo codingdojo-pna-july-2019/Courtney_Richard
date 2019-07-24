@@ -51,7 +51,7 @@
                 <p>This site makes it easy to organize events with your friends.</p>
             </div>
         </div>
-        <div>
+        <div class="errorMSG">
                 {% with messages = get_flashed_messages() %}     
                     {% if messages %}                            
                         {% for message in messages %}            
@@ -63,7 +63,7 @@
 
         <!-- Login Form -->
         <div class="row justify-content-center">
-            <form action="/login" id="loginform">
+            <form action="/login" id="loginform" method="POST">
                 <div class="form-group">
                     <label for="email"><p>Email Address:</p></label>
                     <input class="form-control" type="text" name="email" placeholder="Johndoe@email.com" id="email">
@@ -73,7 +73,7 @@
                     <input class="form-control" type="text" name="password" placeholder="password" id="password">
                 </div>
                 <div class="row justify-content-center">
-                    <input type="button" class="btn btn-info" value="Login">
+                    <input type="submit" class="btn btn-info" value="Login">
                 </div>
             </form>
         </div>
@@ -81,7 +81,7 @@
 
         <!-- Register Form -->
         <div class="row justify-content-center">
-                <form action="/register" id="regform">
+                <form action="/register" id="regform" method="POST">
                     <div class="form-group">
                         <label for="fname"><p>First Name:</p></label>
                         <input class="form-control" type="text" name="fname" placeholder="John" id="email">
@@ -106,7 +106,7 @@
                         <input class="form-control" type="text" name="confirm_pass" placeholder="password?" id="password">
                     </div>
                     <div class="row justify-content-center">
-                        <input type="button" class="btn btn-info" value="Register">
+                        <input type="submit" class="btn btn-info" value="Register">
                     </div>
                 </form>
             </div>

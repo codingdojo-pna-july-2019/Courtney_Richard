@@ -11,4 +11,8 @@ Starting landing page aka index.html -- Richard
 
 
 todo
-    - add validation 7/21/2019
+    - add validation for register 7/21/2019 done* 7/23/19
+    - add validation for Login
+        - put in session fname & id done* 7/23/19
+        - make sure there has to be a session active to go to other routes
+    

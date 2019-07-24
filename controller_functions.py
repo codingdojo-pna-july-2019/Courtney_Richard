@@ -1,13 +1,16 @@
+
+
+
 import re
 from flask_bcrypt import Bcrypt  
-from flask import Flask, render_template, redirect, request, flash	# we now need fewer imports because we're not doing everything in this file!
+from flask import Flask, render_template, redirect, request, flash, session	# we now need fewer imports because we're not doing everything in this file!
 # if we need to work with the database, we'll need those imports:   
 from config import db
 from models import User, Event #whatever classes we need to import from the model file
+from config import app
 
 
-
-bcrypt = Bcrypt()
+bcrypt = Bcrypt(app)
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
 
 # home_page
@@ -22,6 +25,7 @@ def add_user():
     if len(request.form["fname"]) < 2:
         is_valid = False
         flash("Please enter a valid first name")
+
     if len(request.form["lname"]) < 2:
         is_valid = False
         flash("Please enter a valid last name")
@@ -39,11 +43,30 @@ def add_user():
         new_instance_of_user = User(first_name = request.form['fname'],
                                     last_name = request.form['lname'],
                                     email = request.form['email'], 
-                                    password = pw_hash,
-                                    confirm_pass = request.form['confirm_pass'])
+                                    password = pw_hash)
      
-    db.session.add(new_instance_of_user)
-    db.session.commit()
+        db.session.add(new_instance_of_user)
+        db.session.commit()
+    return redirect("/")
+
+
+#login route
+def login():
+    instance_of_user = User.query.filter_by(email=request.form['email']).first()
+    if instance_of_user:
+        pw = bcrypt.check_password_hash(instance_of_user.password, request.form['password'])
+        if pw:
+            session['uid'] = instance_of_user.id
+            session['greetings'] = instance_of_user.first_name
+            return redirect('/homepage')
+    else:
+        flash('Invalid user name or password')
+        return redirect('/')
+
+
+# kills session
+def logout():
+    session.clear()
     return redirect("/")
 
 
