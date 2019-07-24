@@ -69,6 +69,19 @@ def logout():
     session.clear()
     return redirect("/")
 
+# adds a new event
+def New():
+    
+    return render_template ("add_new_event_page.html")
+
+def AddNew():    
+    # need to query the database for current events
+    # create form to add new events in
+    # create validations that check for unfilled requests and for dublicate events
+    # add event to the db
+
+    return redirect("/new")
+
 
 # user landing page closest event & upcomeing events
 def homepage():

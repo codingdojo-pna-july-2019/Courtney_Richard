@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Mali|Nanum+Gothic+Coding&display=swap');
+
+h1, h4, h2 {
+    font-family: 'Nanum Gothic Coding', monospace;
+    padding: 4px;
+    text-align: center;
+}
+p, th, td, ul {
+    font-family: 'Mali', cursive;
+    padding: 5px;
+}
