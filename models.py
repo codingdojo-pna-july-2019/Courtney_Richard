@@ -19,8 +19,8 @@ class Event(db.Model):
     __Tablename__ = "events"
     id = db.Column(db.Integer, primary_key=True)
     event_title = db.Column(db.String(100))
-    date = db.Column(db.DateTime)
-    time = db.Column(db.DateTime)
+    date = db.Column(db.String(8))
+    time = db.Column(db.String(12))
     location = db.Column(db.String(100))
     information = db.Column(db.TEXT)
 

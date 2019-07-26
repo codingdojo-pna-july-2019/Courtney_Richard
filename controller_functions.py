@@ -97,9 +97,9 @@ def addnew():
         flash('Please enter a little more info about this event Thanks! Arrigato')
     if is_valid:
         adding_event = Event(event_title = request.form['EventName'],
-                                    date = request.form['Date'],
-                                    time = request.form['Time'],
                                     location = request.form['Location'],
+                                        date = request.form['Date'],
+                                        time = request.form['Time'],
                                     information = request.form['Info'])
         db.session.add(adding_event)
         db.session.commit()
