@@ -20,6 +20,7 @@ h1, h4 {
 p {
     font-family: 'Mali', cursive;
     padding: 5px;
+    margin: 0;
 }
 .errorMSG {
     color: red;
@@ -30,13 +31,14 @@ p {
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
     background-color: rgba(0, 0, 0, 0.4); 
 }
-.form-group {
+form{
     color: white;
     font-weight: bold;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     border-radius: 8px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
     background-color: rgba(0, 0, 0, 0.4); 
+    padding: 5px;
 }
 .dimensions {
     max-width: 300px;

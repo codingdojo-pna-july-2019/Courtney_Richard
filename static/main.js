@@ -15,4 +15,12 @@ $(document).ready(function () {
         $("#register").hide();
         $("#login").hide();
     });
+    $("#oops").click(function(){
+        $("#loginform").hide();
+        $("#regform").slideDown("slow");
+    });
+    // $("#error").hide();
+    // $("#showError").click(function(){
+    //     $("#error").show();
+    // });
 });

@@ -69,17 +69,42 @@ def logout():
     session.clear()
     return redirect("/")
 
+
 # adds a new event
-def New():
+def new():
     
     return render_template ("add_new_event_page.html")
 
-def AddNew():    
-    # need to query the database for current events
+
+# adds an event to the db
     # create form to add new events in
     # create validations that check for unfilled requests and for dublicate events
     # add event to the db
-
+def addnew():    
+    # need to query the database for current events - doesnt need to query - Richard*
+    is_valid = True
+    if len(request.form['EventName']) < 2:
+        is_valid = False
+        flash('Has to be more than 2 characters')
+    if len(request.form['Location']) < 8:
+        is_valid = False
+        flash('Please be more specific Address, City, State, Zip')
+    if len(request.form['Time']) < 5:
+        is_valid = False
+        flash('Please enter a valid time')
+    if len(request.form['Info']) < 5:
+        is_valid = False
+        flash('Please enter a little more info about this event Thanks! Arrigato')
+    if is_valid:
+        adding_event = Event(event_title = request.form['EventName'],
+                                    date = request.form['Date'],
+                                    time = request.form['Time'],
+                                    location = request.form['Location'],
+                                    information = request.form['Info'])
+        db.session.add(adding_event)
+        db.session.commit()
+        flash('Success')
+        return redirect("/new")
     return redirect("/new")
 
 

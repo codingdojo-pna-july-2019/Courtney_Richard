@@ -25,7 +25,16 @@
             </li>
         </ul>
     </nav>
-    <form>
+    <div class="errorMSG" id="error">
+            {% with messages = get_flashed_messages() %}     
+                {% if messages %}                            
+                    {% for message in messages %}            
+                        <p>{{message}}</p>                   
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+    </div>
+    <form action="/addnew" method="POST">
         <div class="form-group">
             <label for="Event"><p>Event Name:</p></label>
             <input class="form-control" type="text" name="EventName" placeholder="What?">
@@ -33,6 +42,10 @@
         <div class="form-group">
             <label for="Location"><p>Location:</p></label>
             <input class="form-control" type="text" name="Location" placeholder="Where?">
+        </div>
+        <div class="form-group">
+            <label for="Time"><p>Date:</p></label>
+            <input class="form-control" type="text" name="Date" placeholder="When?">
         </div>
         <div class="form-group">
             <label for="Time"><p>Time:</p></label>

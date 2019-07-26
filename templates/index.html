@@ -51,7 +51,7 @@
                 <p>This site makes it easy to organize events with your friends.</p>
             </div>
         </div>
-        <div class="errorMSG">
+        <div class="errorMSG" id="error">
                 {% with messages = get_flashed_messages() %}     
                     {% if messages %}                            
                         {% for message in messages %}            
@@ -64,6 +64,7 @@
         <!-- Login Form -->
         <div class="row justify-content-center">
             <form action="/login" id="loginform" method="POST">
+                <input type="hidden" name="" id="">
                 <div class="form-group">
                     <label for="email"><p>Email Address:</p></label>
                     <input class="form-control" type="text" name="email" placeholder="Johndoe@email.com" id="email">
@@ -73,7 +74,8 @@
                     <input class="form-control" type="password" name="password" placeholder="password" id="password">
                 </div>
                 <div class="row justify-content-center">
-                    <input type="submit" class="btn btn-info" value="Login">
+                    <input type="submit" class="btn btn-info mr-2" value="Login">
+                    <input type="button" class="btn btn-info" id="oops" value="Register">
                 </div>
             </form>
         </div>
@@ -106,17 +108,17 @@
                         <input class="form-control" type="password" name="confirm_pass" placeholder="password?" id="password">
                     </div>
                     <div class="row justify-content-center">
-                        <input type="submit" class="btn btn-info" value="Register">
+                        <input type="submit" class="btn btn-info" id="showError" value="Register">
                     </div>
                 </form>
             </div>
         
         <div class="row justify-content-center">
             <div class="col-xs-6">
-                <input class="btn btn-primary" type="button" id="login" value="Login">
+                <input class="btn btn-primary mr-2" type="button" id="login" value="Login">
             </div>
             <div class="col-xs-6">
-                <input class="btn btn-primary" type="button" id="register" value="Register">
+                <input class="btn btn-primary " type="button" id="register" value="Register">
             </div>
 
         </div>

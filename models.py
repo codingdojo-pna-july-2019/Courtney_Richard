@@ -1,5 +1,6 @@
 from sqlalchemy.sql import func
 from config import db
+from sqlalchemy import create_engine, Column, Integer, String, text
 # Models holds our classes to make the database in SQLALchemy
 
 # User registration class
@@ -13,17 +14,15 @@ class User(db.Model):
     security_answer1 = db.Column(db.String(200))
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
-    events = db.relationship ('Event', backref = 'user', lazy = True)
 
 class Event(db.Model):
     __Tablename__ = "events"
     id = db.Column(db.Integer, primary_key=True)
     event_title = db.Column(db.String(100))
-    date = db.Column(db.DATE)
-    time = db.Column(db.TIME)
+    date = db.Column(db.DateTime)
+    time = db.Column(db.DateTime)
     location = db.Column(db.String(100))
     information = db.Column(db.TEXT)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable = False)
 
 
 class Message(db.Model):
@@ -32,4 +31,6 @@ class Message(db.Model):
     content = db.Column(db.TEXT)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
+
+
 
