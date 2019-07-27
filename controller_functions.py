@@ -89,7 +89,7 @@ def addnew():
     if len(request.form['Location']) < 8:
         is_valid = False
         flash('Please be more specific Address, City, State, Zip')
-    if len(request.form['Time']) < 5:
+    if len(request.form['Time']) < 2:
         is_valid = False
         flash('Please enter a valid time')
     if len(request.form['Info']) < 5:
@@ -110,6 +110,7 @@ def addnew():
 
 # user landing page closest event & upcomeing events
 def homepage():
+
 
     # we need to query the database and display info from events then,
     # add it to the render so we can display it
