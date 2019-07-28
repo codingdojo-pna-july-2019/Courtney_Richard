@@ -1,13 +1,13 @@
 
 
 
-import re
 from flask_bcrypt import Bcrypt  
 from flask import Flask, render_template, redirect, request, flash, session	# we now need fewer imports because we're not doing everything in this file!
 # if we need to work with the database, we'll need those imports:   
 from config import db
-from models import User, Event #whatever classes we need to import from the model file
+from models import User, Event, Message, attendees_table #whatever classes we need to import from the model file
 from config import app
+import re
 
 
 bcrypt = Bcrypt(app)
@@ -72,8 +72,8 @@ def logout():
 
 # adds a new event
 def new():
-    
-    return render_template ("add_new_event_page.html")
+    events = Event.query.all()
+    return render_template ("add_new_event_page.html", all_events = events)
 
 
 # adds an event to the db
@@ -100,6 +100,7 @@ def addnew():
                                     location = request.form['Location'],
                                         date = request.form['Date'],
                                         time = request.form['Time'],
+                                        creator_id = session['uid'],
                                     information = request.form['Info'])
         db.session.add(adding_event)
         db.session.commit()
@@ -108,13 +109,27 @@ def addnew():
     return redirect("/new")
 
 
+# add a atendee
+def new_attendee():
+    existing_event = Event.query.get(request.form['e_id'])
+    print(existing_event)
+    user_wanting_to_attend = User.query.get(session['uid'])
+    print(user_wanting_to_attend)
+    user_wanting_to_attend.users_that_attend_events.append(existing_event)
+    db.session.commit()
+
+    return redirect("/homepage")
+
 # user landing page closest event & upcomeing events
 def homepage():
-
-
+    events = Event.query.all()
+    
+    user = User.query.get(session['uid'])
+    user_events = user.users_that_attend_events.all()
+    
     # we need to query the database and display info from events then,
     # add it to the render so we can display it
     # things to query for are "events name", "Location", "number of attendees"
     # and future events
 
-    return render_template("user_home_page.html")
+    return render_template("user_home_page.html", all_events = events, all_events_of_user = user_events)

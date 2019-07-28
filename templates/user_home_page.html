@@ -35,24 +35,53 @@
         </div>
         <div class="table-responsive-md container">
                 <!-- Jinja loop for events -->
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th> Event Name</th>
-                        <th>Location</th>
-                        <th>Attendees</th>
-                        <th>Time</th>
-                    </tr>
-                </thead>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th> Event Name</th>
+                            <th>Location</th>
+                            <th>Attendees</th>
+                            <th>Date</th>
+                            
+                            <th>Attend Event?</th>
+                        </tr>
+                    </thead>
+                    {% for event in all_events %}
                 <tbody>
                     <tr>
-                    <td>name of event</td>
-                    <td>Location from db</td>
-                    <td>how many people attending</td>
-                    <td>time</td>
+                    <td>{{ event.event_title }}</td>
+                    <td>{{ event.location }}</td>
+                    <td>{{ event.events_that_have_attendees.count() }} </td>
+
+                    <td>{{ event.date }} {{ event.time }} </td>
+            
+                    <form action="/new_attendee" method="post">
+                        <input type="hidden" value="{{ event.id  }}" name="e_id">
+                        <td><input type="submit" value="Attend"></td>
+                    </form>
                     </tr>
                 </tbody>
-                </table>
+                {% endfor %}
+            </table>
+            <table class="table table-hover">
+                <thead>
+                        <tr>
+                            <th> Event Name</th>
+                            <th>Location</th>
+                            <th>Attendees</th>
+                            <th>Date/Time</th>
+
+                        </tr>
+                    </thead>
+                    {% for user in all_events_of_user %}
+                    <tbody>
+                        <td> {{ user.event_title }} </td>
+                        <td>{{ user.location }}</td>
+                        <td>{{ user.events_that_have_attendees.count() }}</td>
+                        <td>{{ user.date }} {{ user.time }}</td>
+                    </tbody>
+                    {% endfor %}
+            </table>
         </div>
 
 

@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect	# any other flask imports needed
+from flask import Flask,render_template, request, redirect	# any other flask imports needed
 from config import app, db
 from models import User, Event
 import routes

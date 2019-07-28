@@ -25,6 +25,7 @@
             </li>
         </ul>
     </nav>
+    <div class="container">
     <div class="errorMSG" id="error">
             {% with messages = get_flashed_messages() %}     
                 {% if messages %}                            
@@ -34,33 +35,67 @@
                 {% endif %}
             {% endwith %}
     </div>
-    <form action="/addnew" method="POST">
-        <div class="form-group">
-            <label for="Event"><p>Event Name:</p></label>
-            <input class="form-control" type="text" name="EventName" placeholder="What?">
+    <div class="row">
+        <div class="w-40">
+            <form action="/addnew" method="POST" class=" ">
+                <div class="form-group ">
+                    <label for="Event"><p>Event Name:</p></label>
+                    <input class="form-control" type="text" name="EventName" placeholder="What?">
+                </div>
+                <div class="form-group">
+                    <label for="Location"><p>Location:</p></label>
+                    <input class="form-control" type="text" name="Location" placeholder="Where?">
+                </div>
+                <div class="form-group">
+                    <label for="Date"><p>Date:</p></label>
+                    <input class="form-control" type="date" name="Date" placeholder="When?">
+                </div>
+                <div class="form-group">
+                    <label for="Time"><p>Time:</p></label>
+                    <input class="form-control" type="time" name="Time" placeholder="When?">
+                </div>
+                <div class="form-group">
+                    <label for="Info"><p>Information:</p></label>
+                    <input class="form-control" type="textarea" name="Info" placeholder="Why?" id="password">
+                </div>
+                <div class="row justify-content-center">
+                    <input type="submit" class="btn btn-info" value="Create">
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="Location"><p>Location:</p></label>
-            <input class="form-control" type="text" name="Location" placeholder="Where?">
-        </div>
-        <div class="form-group">
-            <label for="Date"><p>Date:</p></label>
-            <input class="form-control" type="text" name="Date" placeholder="When?">
-        </div>
-        <div class="form-group">
-            <label for="Time"><p>Time:</p></label>
-            <input class="form-control" type="text" name="Time" placeholder="When?">
-        </div>
-        <div class="form-group">
-            <label for="Info"><p>Information:</p></label>
-            <input class="form-control" type="text" name="Info" placeholder="Why?" id="password">
-        </div>
-        <div class="row justify-content-center">
-            <input type="submit" class="btn btn-info" value="Register">
-        </div>
-    </form>
 
+        <div class="w-40 ml-5">
+            <table class="table table-hover" >
+                    <thead>
+                        <tr>
+                            <th> Event Name</th>
+                            <th>Location</th>
+                            <th>Attendees</th>
+                            <th>Date</th>
+                            
+                            <th>Attend Event?</th>
+                        </tr>
+                    </thead>
+                    {% for event in all_events %}
+                <tbody>
+                    <tr>
+                    <td>{{ event.event_title }}</td>
+                    <td>{{ event.location }}</td>
+                    <td>{{ event.events_that_have_attendees.count() }} </td>
 
+                    <td>{{ event.date }} {{ event.time }} </td>
+            
+                    <form action="/new_attendee" method="post">
+                        <input type="hidden" value="{{ event.id  }}" name="e_id">
+                        <td><input type="submit" value="Attend"></td>
+                    </form>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
