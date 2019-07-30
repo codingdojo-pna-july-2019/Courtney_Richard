@@ -123,13 +123,16 @@ def new_attendee():
 # user landing page closest event & upcomeing events
 def homepage():
     events = Event.query.all()
-    
     user = User.query.get(session['uid'])
     user_events = user.users_that_attend_events.all()
-    
-    # we need to query the database and display info from events then,
-    # add it to the render so we can display it
-    # things to query for are "events name", "Location", "number of attendees"
-    # and future events
 
     return render_template("user_home_page.html", all_events = events, all_events_of_user = user_events)
+
+# notification page where messages are displayed and edited
+def notifications():
+    user = User.query.get(session['uid'])
+
+    return render_template ("message_board.html", user = user)
+
+    
+   
