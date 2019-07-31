@@ -125,14 +125,23 @@ def homepage():
     events = Event.query.all()
     user = User.query.get(session['uid'])
     user_events = user.users_that_attend_events.all()
-
+    
     return render_template("user_home_page.html", all_events = events, all_events_of_user = user_events)
 
 # notification page where messages are displayed and edited
-def notifications():
-    user = User.query.get(session['uid'])
-
-    return render_template ("message_board.html", user = user)
+def event(id):
+    
+    user_events = Event.query.get(id)
+    print(user_events)
+    # query_events_and_message = user.
+    return render_template("message_board.html", organize_event = user_events )
+def create_msg():
+    
+    new_message = Message(content = request.form['msg'])
+    print(new_message.content)
+    db.session.add(new_message)
+    db.session.commit()
+    return redirect("/event")
 
     
    
