@@ -111,14 +111,20 @@ def addnew():
 
 # add a atendee
 def new_attendee():
-    existing_event = Event.query.get(request.form['e_id'])
-    print(existing_event)
-    user_wanting_to_attend = User.query.get(session['uid'])
-    print(user_wanting_to_attend)
-    user_wanting_to_attend.users_that_attend_events.append(existing_event)
-    db.session.commit()
+    if (request.form['Attend'] == "Attend"){
+        existing_event = Event.query.get(request.form['e_id'])
+        print(existing_event)
+        user_wanting_to_attend = User.query.get(session['uid'])
+        print(user_wanting_to_attend)
+        user_wanting_to_attend.users_that_attend_events.append(existing_event)
+        db.session.commit()
+        request.form['Attend'] = "Unattend"
+        return redirect("/homepage")}
+    else:
+        # trying to toggle b/w attend and unattend
+    
 
-    return redirect("/homepage")
+        return redirect("/homepage")
 
 # user landing page closest event & upcomeing events
 def homepage():
@@ -135,17 +141,17 @@ def event(id):
     # print(user_events.events_that_have_attendees.all()) #get all users if session not found in this then hide button iwth if statement
     
     return render_template("message_board.html", organize_event = user_events )
-def create_msg(id):
+def create_msg():
     
     new_message = Message(content = request.form['msg'], 
                         user_who_created = session['uid'],
                         user_info = session['uid'],
                         event_info = request.form['e_id'])
-    id = request.form['e_id']
     print(new_message.content)
     db.session.add(new_message)
     db.session.commit()
-    return redirect("/event")
+    
+    return event(request.form['e_id'])
 
     
    
