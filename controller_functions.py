@@ -135,6 +135,7 @@ def event(id):
     print(user_events)
     # query_events_and_message = user.
     return render_template("message_board.html", organize_event = user_events )
+    
 def create_msg():
     
     new_message = Message(content = request.form['msg'])
