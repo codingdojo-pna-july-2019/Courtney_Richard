@@ -132,12 +132,16 @@ def homepage():
 def event(id):
     
     user_events = Event.query.get(id)
-    print(user_events)
-    # query_events_and_message = user.
-    return render_template("message_board.html", organize_event = user_events )
-def create_msg():
+    # print(user_events.events_that_have_attendees.all()) #get all users if session not found in this then hide button iwth if statement
     
-    new_message = Message(content = request.form['msg'])
+    return render_template("message_board.html", organize_event = user_events )
+def create_msg(id):
+    
+    new_message = Message(content = request.form['msg'], 
+                        user_who_created = session['uid'],
+                        user_info = session['uid'],
+                        event_info = request.form['e_id'])
+    id = request.form['e_id']
     print(new_message.content)
     db.session.add(new_message)
     db.session.commit()
