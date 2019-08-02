@@ -58,9 +58,9 @@
 
                     <td>{{ event.date }} {{ event.time }} </td>
             
-                    <form action="/new_attendee" method="post">
+                    <form action="/new_attendee" method="post" id="A_U">
                         <input type="hidden" value="{{ event.id  }}" name="e_id">
-                        <td><input type="submit" value="Attend" name="Attend"></td>
+                        <td><input type="submit" value="Attend"></td>
                     </form>
                     </tr>
                 </tbody>

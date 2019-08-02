@@ -111,15 +111,16 @@ def addnew():
 
 # add a atendee
 def new_attendee():
-    if (request.form['Attend'] == "Attend"){
+    A = add_new_event_page.getElementById("A_U")
+    if (A.style.display == "Attend"):
         existing_event = Event.query.get(request.form['e_id'])
         print(existing_event)
         user_wanting_to_attend = User.query.get(session['uid'])
         print(user_wanting_to_attend)
         user_wanting_to_attend.users_that_attend_events.append(existing_event)
         db.session.commit()
-        request.form['Attend'] = "Unattend"
-        return redirect("/homepage")}
+        A.style.display = "Unattend"
+        return redirect("/homepage")
     else:
         # trying to toggle b/w attend and unattend
     
