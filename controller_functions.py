@@ -112,7 +112,7 @@ def addnew():
 # add a atendee
 def new_attendee():
 
-    # if (request.form['Attend'] == "Attend"){
+    # if (request.form['Attend'] == "Attend")
     existing_event = Event.query.get(request.form['e_id'])
     print(existing_event)
     user_wanting_to_attend = User.query.get(session['uid'])
@@ -134,12 +134,15 @@ def homepage():
 # notification page where messages are displayed and edited
 def event(id):
     user_events = Event.query.get(id)
+    get_messages = Message.query.all()
+    print(get_messages)
+    # authors = Message.author_of_msg.query.get(session['uid'])
     
     # print(user_events.events_that_have_attendees.all()) #get all users if session not found in this then hide button iwth if statement
     
-    return render_template("message_board.html", organize_event = user_events )
+    return render_template("message_board.html", organize_event = user_events, read_message = get_messages)
+
 def create_msg():
-    
     new_message = Message(content = request.form['msg'], 
                         user_who_created = session['uid'],
                         user_info = session['uid'],

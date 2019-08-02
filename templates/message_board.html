@@ -53,7 +53,13 @@
         </form>
 
         <div class="msg_section">
-            <p></p>
+            <!-- {% for Message in get_message %} -->
+            <tbody>
+                <td>{{ Message.content}}</td>
+                <!-- <td>{{ Message.first_name}}</td>
+                <td>{{ Message.last_name}}</td> -->
+            </tbody>
+            <!-- {% endfor %} -->
         </div>
 
 
