@@ -111,21 +111,17 @@ def addnew():
 
 # add a atendee
 def new_attendee():
-    A = add_new_event_page.getElementById("A_U")
-    if (A.style.display == "Attend"):
-        existing_event = Event.query.get(request.form['e_id'])
-        print(existing_event)
-        user_wanting_to_attend = User.query.get(session['uid'])
-        print(user_wanting_to_attend)
-        user_wanting_to_attend.users_that_attend_events.append(existing_event)
-        db.session.commit()
-        A.style.display = "Unattend"
-        return redirect("/homepage")
-    else:
-        # trying to toggle b/w attend and unattend
-    
 
-        return redirect("/homepage")
+    # if (request.form['Attend'] == "Attend"){
+    existing_event = Event.query.get(request.form['e_id'])
+    print(existing_event)
+    user_wanting_to_attend = User.query.get(session['uid'])
+    print(user_wanting_to_attend)
+    user_wanting_to_attend.users_that_attend_events.append(existing_event)
+    db.session.commit()
+        # request.form['Attend'] = "Unattend"
+    return redirect("/homepage")
+
 
 # user landing page closest event & upcomeing events
 def homepage():
@@ -137,8 +133,8 @@ def homepage():
 
 # notification page where messages are displayed and edited
 def event(id):
-    
     user_events = Event.query.get(id)
+    
     # print(user_events.events_that_have_attendees.all()) #get all users if session not found in this then hide button iwth if statement
     
     return render_template("message_board.html", organize_event = user_events )
@@ -152,7 +148,7 @@ def create_msg():
     db.session.add(new_message)
     db.session.commit()
     
-    return event(request.form['e_id'])
+    return redirect("/event/" + request.form['e_id'])
 
     
    
