@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Notifications</title>
+    <title>Event Details</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
@@ -46,14 +46,15 @@
                     </tbody>
 
                 </table>
-        <form action="/create_msg " method="post" id="msg">
+        <form action="/create_msg" method="post" id="msg">
             <textarea class="form-control" name="msg" id="message" cols="30" rows="10"></textarea>
             <input type="hidden" name="e_id" value="{{ organize_event.id }}" >
             <input type="submit" class="btn btn-info" id="#">
-        
-        
         </form>
 
+        <div class="msg_section">
+            <p></p>
+        </div>
 
 
 
