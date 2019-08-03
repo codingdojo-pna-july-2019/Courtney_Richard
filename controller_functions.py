@@ -134,11 +134,11 @@ def homepage():
 # notification page where messages are displayed and edited
 def event(id):
     user_events = Event.query.get(id)
-    get_messages = Message.query.all()
+    get_messages = Message.query.filter_by(event_info = id)
     print(get_messages)
-    # authors = Message.author_of_msg.query.get(session['uid'])
     
-    # print(user_events.events_that_have_attendees.all()) #get all users if session not found in this then hide button iwth if statement
+    
+     #get all users if session not found in this then hide button iwth if statement
     
     return render_template("message_board.html", organize_event = user_events, read_message = get_messages)
 
@@ -147,11 +147,26 @@ def create_msg():
                         user_who_created = session['uid'],
                         user_info = session['uid'],
                         event_info = request.form['e_id'])
-    print(new_message.content)
+    
+
     db.session.add(new_message)
     db.session.commit()
+
     
     return redirect("/event/" + request.form['e_id'])
 
-    
+
+#delete message
+def delete():
+    message_to_delete = Message.query.get(request.form['message_id'])
+    # user_associated.user_messages.delete(message_to_delete)
+    db.session.delete(message_to_delete)
+    db.session.commit()
+
+    return redirect("/event/" + request.form['e_id'])
    
+
+#search feature for ticketmaster api
+def search():
+
+    return render_template("search.html")

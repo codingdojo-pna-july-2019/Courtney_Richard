@@ -43,9 +43,11 @@ class Message(db.Model):
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
     user_info = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    author_of_msg = db.relationship('User', foreign_keys=[user_info], backref="message", cascade="all")
+    author_of_msg = db.relationship('User', foreign_keys=[user_info], backref="message")
     event_info = db.Column(db.Integer, db.ForeignKey("event.id"), nullable=False)
-    event_message = db.relationship('Event', foreign_keys=[event_info], backref="event_messages", cascade="all")
+    event_message = db.relationship('Event', foreign_keys=[event_info], backref="event_messages")
+    def __repr__(self):
+     return f"<User {self.id} - {self.content} {self.author_of_msg}"
 # add one to many from message to user and add col for author/creator of the message one to many to event as well. 
 
 

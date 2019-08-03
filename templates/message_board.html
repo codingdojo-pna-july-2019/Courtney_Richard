@@ -51,12 +51,27 @@
             <input type="hidden" name="e_id" value="{{ organize_event.id }}" >
             <input type="submit" class="btn btn-info" id="#">
         </form>
-
+        <div class="errorMSG" id="error">
+                {% with messages = get_flashed_messages() %}     
+                    {% if messages %}                            
+                        {% for message in messages %}            
+                            <p>{{message}}</p>                   
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+        </div>
+        {% for message in read_message %}
         <div class="msg_section">
-            
+            {{ message.content }}
+            <form action="/delete" method="post">
+            <input type="hidden" name="message_id" value="{{ message.id }}">
+            <input type="hidden" name="e_id" value="{{ message.event_message.id }}">
+            <input type="submit" name="del_msg"value="delete">
+            </form>
+
             
         </div>
-
+        {% endfor %}
 
 
 
