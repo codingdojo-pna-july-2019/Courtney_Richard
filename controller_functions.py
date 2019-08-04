@@ -110,18 +110,27 @@ def addnew():
 
 
 # add a atendee
-def new_attendee():
+def new_attendee(e_id):
 
-    # if (request.form['Attend'] == "Attend")
-    existing_event = Event.query.get(request.form['e_id'])
+    existing_event = Event.query.get(e_id)
     print(existing_event)
     user_wanting_to_attend = User.query.get(session['uid'])
     print(user_wanting_to_attend)
     user_wanting_to_attend.users_that_attend_events.append(existing_event)
     db.session.commit()
-        # request.form['Attend'] = "Unattend"
-    return redirect("/homepage")
 
+    return redirect("/new")
+
+def delete_attendee(e_id):
+
+    existing_event = Event.query.get(e_id)
+    print(existing_event)
+    user_wanting_to_attend = User.query.get(session['uid'])
+    print(user_wanting_to_attend)
+    user_wanting_to_attend.users_that_attend_events.remove(existing_event)
+    db.session.commit()
+
+    return redirect("/new")
 
 # user landing page closest event & upcomeing events
 def homepage():
@@ -134,11 +143,11 @@ def homepage():
 # notification page where messages are displayed and edited
 def event(id):
     user_events = Event.query.get(id)
-    get_messages = Message.query.filter_by(event_info = id)
+    get_messages = Message.query.all()  
     print(get_messages)
     
     
-     #get all users if session not found in this then hide button iwth if statement
+     #get all users if session not found in this then hide button with if statement
     
     return render_template("message_board.html", organize_event = user_events, read_message = get_messages)
 
@@ -164,7 +173,7 @@ def delete():
     db.session.commit()
 
     return redirect("/event/" + request.form['e_id'])
-   
+
 
 #search feature for ticketmaster api
 def search():

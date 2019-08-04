@@ -9,3 +9,15 @@ p, th, td, ul {
     font-family: 'Mali', cursive;
     padding: 5px;
 }
+.message{
+    margin: 0px;
+}
+.author{
+    text-align:  right;
+}
+.msg_section{
+    display: inline-block;
+}
+.delete{
+    text-align: right;
+}
