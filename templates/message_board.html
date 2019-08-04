@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Event Details</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='message.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
@@ -51,12 +51,40 @@
             <input type="hidden" name="e_id" value="{{ organize_event.id }}" >
             <input type="submit" class="btn btn-info" id="#">
         </form>
-
+        <div class="errorMSG" id="error">
+                {% with messages = get_flashed_messages() %}     
+                    {% if messages %}                            
+                        {% for message in messages %}            
+                            <p>{{message}}</p>                   
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+        </div>
+        {% for message in read_message %}
+<<<<<<< HEAD
         <div class="msg_section">
-            
+            {{ message.content }}
+            {{ message.author_of_msg.first_name }}
+            <form action="/delete" method="post">
+            <input type="hidden" name="message_id" value="{{ message.id }}">
+            <input type="hidden" name="e_id" value="{{ message.event_message.id }}">
+            <input type="submit" name="del_msg"value="delete">
+            </form>
+
             
         </div>
-
+=======
+                <div class="msg_section">
+                    <p class="message">{{ message.content }} </p>  
+                    <p class="author"> by {{ message.author_of_msg.first_name }}{{ message.last_name }}</p>
+                    <form class="delete" action="/delete" method="post">
+                    <input type="hidden" name="message_id" value="{{ message.id }}">
+                    <input type="hidden" name="e_id" value="{{ message.event_message.id }}">
+                    <input type="submit" name="del_msg"value="delete">
+                    </form>
+                </div>
+>>>>>>> 48baee57d517c8aff4e4ee677d259482d5d9df85
+        {% endfor %}
 
 
 

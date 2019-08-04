@@ -85,13 +85,18 @@
                     <td>{{ event.event_title }}</td>
                     <td>{{ event.location }}</td>
                     <td>{{ event.events_that_have_attendees.count() }} </td>
-
                     <td>{{ event.date }} {{ event.time }} </td>
-            
-                    <form action="/new_attendee" method="post">
-                        <input type="hidden" value="{{ event.id  }}" name="e_id">
-                        <td><input type="submit" value="Attend"></td>
+                    
+                    <td>{% if session['uid'] in event.events_that_have_attendees|map(attribute="id") %}  
+                            <p><a href="/delete_attendee/{{event.id}}"> <button>Unattend</button> </a></p>
+                        {% else %}
+                            <p><a href="/new_attendee/{{event.id}}"> <button>Attend</button> </a></p>
+                        {% endif %}</td>
+                  
+                    <form action="/event/{{ event.id  }}">
+                        <td><input class="btn btn-info" type="submit" value="Event Details"></td>
                     </form>
+            
                     </tr>
                 </tbody>
                 {% endfor %}

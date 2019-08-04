@@ -22,10 +22,10 @@
                 <a class="nav-link" href="/new">New</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Search</a>
+                <a class="nav-link" href="/search">Search</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="event">notifications</a>
+                <a class="nav-link" href="event">Notifications</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
@@ -36,36 +36,7 @@
         <div class="d-flex justify-content-center">
             <h2>Welcome {{session['greetings']}} </h2>
         </div>
-        <div class="table-responsive-md container">
-                <!-- Jinja loop for events -->
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th> Event Name</th>
-                            <th>Location</th>
-                            <th>Attendees</th>
-                            <th>Date</th>
-                            
-                            <th>Attend Event?</th>
-                        </tr>
-                    </thead>
-                    {% for event in all_events %}
-                <tbody>
-                    <tr>
-                    <td>{{ event.event_title }}</td>
-                    <td>{{ event.location }}</td>
-                    <td>{{ event.events_that_have_attendees.count() }} </td>
 
-                    <td>{{ event.date }} {{ event.time }} </td>
-            
-                    <form action="/new_attendee" method="post" id="A_U">
-                        <input type="hidden" value="{{ event.id  }}" name="e_id">
-                        <td><input type="submit" value="Attend"></td>
-                    </form>
-                    </tr>
-                </tbody>
-                {% endfor %}
-            </table>
             <table class="table table-hover">
                 <thead>
                         <tr>
