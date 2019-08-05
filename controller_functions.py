@@ -176,7 +176,7 @@ def delete():
     return redirect("/event/" + request.form['e_id'])
 
 
-#search feature for ticketmaster api
+#search feature for ticketmaster api work in progress will finish tomorrow *rich
 def search():
     api_url = "http://api.openweathermap.org/data/2.5/weather?q={},us&units=imperial&APPID=8c454bc67ac05dbee64b8aef30645221"
 
@@ -184,6 +184,9 @@ def search():
     event_location = Event.query.all()
     for event in event_location:
         response = requests.get(api_url.format(event.location)).json()
+        weather = {
+
+        }
     return render_template("search.html")
 
 
