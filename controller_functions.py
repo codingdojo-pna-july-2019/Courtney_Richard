@@ -3,6 +3,7 @@
 
 from flask_bcrypt import Bcrypt  
 from flask import Flask, render_template, redirect, request, flash, session	# we now need fewer imports because we're not doing everything in this file!
+import requests
 # if we need to work with the database, we'll need those imports:   
 from config import db
 from models import User, Event, Message, attendees_table #whatever classes we need to import from the model file
@@ -177,5 +178,13 @@ def delete():
 
 #search feature for ticketmaster api
 def search():
+    api_url = "http://api.openweathermap.org/data/2.5/weather?q={},us&units=imperial&APPID=8c454bc67ac05dbee64b8aef30645221"
 
+    data = []
+    event_location = Event.query.all()
+    for event in event_location:
+        response = requests.get(api_url.format(event.location)).json()
     return render_template("search.html")
+
+
+    c67uIW7Qedz4nlhrGmV9PwnRM42zl5au

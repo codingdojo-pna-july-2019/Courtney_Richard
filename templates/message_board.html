@@ -18,7 +18,7 @@
                 <a class="nav-link" href="/new">New</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Search</a>
+                <a class="nav-link" href="/search">Search</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/notifications">Notifications</a>
@@ -59,26 +59,8 @@
                         {% endfor %}
                     {% endif %}
                 {% endwith %}
-<<<<<<< HEAD
         </div>
         {% for message in read_message %}
-<<<<<<< HEAD
-        <div class="msg_section">
-            {{ message.content }}
-            {{ message.author_of_msg.first_name }}
-            <form action="/delete" method="post">
-            <input type="hidden" name="message_id" value="{{ message.id }}">
-            <input type="hidden" name="e_id" value="{{ message.event_message.id }}">
-            <input type="submit" name="del_msg"value="delete">
-            </form>
-
-            
-        </div>
-=======
-=======
-        </div>
-        {% for message in read_message %}
->>>>>>> 48baee57d517c8aff4e4ee677d259482d5d9df85
                 <div class="msg_section">
                     <p class="message">{{ message.content }} </p>  
                     <p class="author"> by {{ message.author_of_msg.first_name }}{{ message.last_name }}</p>
@@ -88,10 +70,6 @@
                     <input type="submit" name="del_msg"value="delete">
                     </form>
                 </div>
-<<<<<<< HEAD
->>>>>>> 48baee57d517c8aff4e4ee677d259482d5d9df85
-=======
->>>>>>> 48baee57d517c8aff4e4ee677d259482d5d9df85
         {% endfor %}
 
 
