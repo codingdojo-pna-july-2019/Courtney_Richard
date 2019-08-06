@@ -209,5 +209,11 @@ def search():
         data.append(weather)
     return render_template("search.html")
 
+def user_pg(id):
+    user_info = User.query.get(id)
+    print(user_info)
+
+    return render_template("user_info.html", user= user_info)
+
 
     
