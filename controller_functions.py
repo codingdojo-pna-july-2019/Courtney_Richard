@@ -74,8 +74,24 @@ def logout():
 # adds a new event
 def new():
     events = Event.query.all()
-    return render_template ("add_new_event_page.html", all_events = events)
+    api_url = "http://api.openweathermap.org/data/2.5/weather?q={},us&units=imperial&APPID=8c454bc67ac05dbee64b8aef30645221"
 
+    data = []
+    
+    for event in events:
+        response = requests.get(api_url.format(event.location)).json()
+        if response['cod'] != '404':
+            weather = {
+                'city': event.location,
+                'temperature' : response['main']['temp'],
+                'description' : response['weather'][0]['description'],
+                'icon' : response['weather'][0]['icon']
+            }
+            data.append(weather)
+        print(response)
+    return render_template ("add_new_event_page.html", all_events = events, all_weather = data)
+# if weather city == event.location 
+#     display weather.description weather icon and so forth
 
 # adds an event to the db
     # create form to add new events in
@@ -185,9 +201,13 @@ def search():
     for event in event_location:
         response = requests.get(api_url.format(event.location)).json()
         weather = {
-
+            'city': Event.location,
+            'temperature' : response['main']['temp'],
+            'description' : response['weather'][0]['description'],
+            'icon' : response['weather'][0]['icon']
         }
+        data.append(weather)
     return render_template("search.html")
 
 
-    c67uIW7Qedz4nlhrGmV9PwnRM42zl5au
+    
