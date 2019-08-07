@@ -4,6 +4,7 @@
 from flask_bcrypt import Bcrypt  
 from flask import Flask, render_template, redirect, request, flash, session	# we now need fewer imports because we're not doing everything in this file!
 import requests
+from sqlalchemy import update
 # if we need to work with the database, we'll need those imports:   
 from config import db
 from models import User, Event, Message, attendees_table #whatever classes we need to import from the model file
@@ -211,9 +212,40 @@ def search():
 
 def user_pg(id):
     user_info = User.query.get(id)
-    print(user_info)
+    user_event = user_info.users_that_attend_events.all()
+    return render_template("user_info.html", user= user_info, user_events = user_event)
 
-    return render_template("user_info.html", user= user_info)
+def edit_pg():
+    user_info = User.query.get(session['uid'])
 
-
+    return render_template("edit_pg.html", user= user_info)
     
+def edit_user():
+    is_valid = True
+    if len(request.form["fname"]) < 2:
+        is_valid = False
+        flash("Please enter a valid first name")
+    if len(request.form["lname"]) < 2:
+        is_valid = False
+        flash("Please enter a valid last name")
+    if not EMAIL_REGEX.match(request.form["email"]):    
+        is_valid = False
+        flash("Invalid email address!")
+    if len(request.form["password"]) < 8:
+        is_valid = False
+        flash("Password should be at least 8 characters")
+    if request.form['password'] != request.form['confirm_pass']:
+        is_valid = False
+        flash("Passwords need to match")
+
+    if is_valid:
+        pw_hash = bcrypt.generate_password_hash(request.form['password'])
+        instance_of_user = User(first_name = request.form['fname'],
+                                last_name = request.form['lname'],
+                                email = request.form['email'], 
+                                password = pw_hash)
+        
+        update(instance_of_user).where(User.id == session['uid'])
+        db.session.commit()
+
+    return redirect("/edit_page" )

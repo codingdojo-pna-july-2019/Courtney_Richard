@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='edit.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
+    <title>Edit Page</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-light justify-content-center">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/homepage">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/new">New</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/search">Search</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="event">Notifications</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+        </ul>
+    </nav> 
+    <div class="errorMSG" id="error">
+            {% with messages = get_flashed_messages() %}     
+                {% if messages %}                            
+                    {% for message in messages %}            
+                        <p>{{message}}</p>                   
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+    </div>
+    <div class="row justify-content-center">
+            <form action="/edit" id="regform" method="POST">
+                <div class="form-group">
+                    <label for="fname"><p>First Name:</p></label>
+                    <input class="form-control" type="text" name="fname" placeholder="{{ user.first_name }}" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="lname"> <p>Last Name:</p></label>
+                    <input class="form-control" type="text" name="lname" placeholder="{{ user.last_name }}" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="email"><p>Email Address:</p></label>
+                    <input class="form-control" type="text" name="email" placeholder="{{ user.email }}" id="email">
+                    
+                    <!-- Ajax validation comes here -->
+                    <div id="UserNameValidation"></div>
+                </div>
+                <div class="form-group">
+                    <label for="password"><p>Password:</p></label>
+                    <input class="form-control" type="password" name="password" placeholder="password?" id="">
+                </div>
+                <div class="form-group">
+                    <label for="confirm_pass"><p>Confirm Password:</p></label>
+                    <input class="form-control" type="password" name="confirm_pass" placeholder="password?" id="password">
+                </div>
+                <div class="row justify-content-center">
+                    <input type="submit" class="btn btn-info" id="showError" value="Register">
+                </div>
+            </form>
+        </div>
+</body>
+</html>

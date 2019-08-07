@@ -45,18 +45,26 @@
             <td>{{ user.email }}</td>
             <td>*********</td>  
             {% if session['uid'] ==  user.id  %}
-                <form action="/edit_user" method="POST">
+                <form action="/edit_page">
                     <td><input class="btn btn-info" type="submit" value="Edit"></td>
                 </form>
             {% endif %}
         </tbody>
         <thead>
             <tr>
-                <th>Events</th>
+                <th>Event</th>
+                <th>Location</th>
+                <th>Time</th>
+                <th>Date</th>
             </tr>
+        {% for user_event in user_events %}
             <tbody>
-                <td>???</td>
+                <td>{{ user_event.event_title }}</td>
+                <td>{{ user_event.location }}</td>
+                <td>{{ user_event.time }}</td>
+                <td>{{ user_event.date }}</td>
             </tbody>
+        {% endfor %}   
         </thead>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

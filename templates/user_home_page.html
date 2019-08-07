@@ -50,7 +50,7 @@
                     </thead>
                     {% for user in all_events_of_user %}
                     <tbody>
-                        <td> {{ user.event_title }} </td>
+                        <td>{{ user.event_title }}</td>
                         <td>{{ user.location }}</td>
                         <td>{{ user.events_that_have_attendees.count() }}</td>
                         <td>{{ user.date }} {{ user.time }}</td>
