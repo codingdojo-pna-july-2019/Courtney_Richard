@@ -46,8 +46,7 @@ class Message(db.Model):
     author_of_msg = db.relationship('User', foreign_keys=[user_info], backref="message")
     event_info = db.Column(db.Integer, db.ForeignKey("event.id"), nullable=False)
     event_message = db.relationship('Event', foreign_keys=[event_info], backref="event_messages")
-    def __repr__(self):
-     return f"<User {self.id} - {self.content} {self.author_of_msg}"
+    
 # add one to many from message to user and add col for author/creator of the message one to many to event as well. 
 
 
