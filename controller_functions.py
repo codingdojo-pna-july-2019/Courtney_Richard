@@ -1,7 +1,6 @@
 
 
 
-from flask_bcrypt import Bcrypt  
 from flask import Flask, render_template, redirect, request, flash, session	# we now need fewer imports because we're not doing everything in this file!
 import requests
 from sqlalchemy import update
@@ -10,6 +9,7 @@ from config import db
 from models import User, Event, Message, attendees_table #whatever classes we need to import from the model file
 from config import app
 import re
+from flask_bcrypt import Bcrypt  
 
 
 bcrypt = Bcrypt(app)
