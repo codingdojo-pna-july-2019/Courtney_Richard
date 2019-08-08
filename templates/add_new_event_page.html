@@ -81,14 +81,16 @@
                         </tr>
                     </thead>
                     {% for event in all_events %}
-                        
-                <tbody>
-                    <tr>
-                    <td>{{ event.event_title }}</td>
-                    <td>{{ event.location }} </td>
-                    <td>{{ event.events_that_have_attendees.count() }} </td>
-                    <td>{{ event.date }} {{ event.time }} </td>
-                    <td>{{ event.temperature }}{{ event.description }}<img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image"></td>
+                    
+                    <tbody>
+                        <tr>
+                            <td>{{ event.event_title }}</td>
+                            <td>{{ event.location }} </td>
+                            <td>{{ event.events_that_have_attendees.count() }} </td>
+                            <td>{{ event.date }} {{ event.time }} </td>
+                    {% for weather in all_weather %}
+                        <td>{{ weather.temperature }}{{ weather.description }} <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image"></td>
+                    {%endfor%}
                     <td>{% if session['uid'] in event.events_that_have_attendees|map(attribute="id") %}  
                             <p><a href="/delete_attendee/{{event.id}}"> <button>Unattend</button> </a></p>
                         {% else %}
@@ -101,7 +103,6 @@
             
                     </tr>
                 </tbody>
-                
                 {% endfor %}
             </table>
         </div>

@@ -31,42 +31,43 @@
             </li>
         </ul>
     </nav>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>Edit Information</th>
-            </tr>
-        </thead>
-        <tbody>
-            <td>{{ user.first_name }}  {{ user.last_name }}</td>
-            <td>{{ user.email }}</td>
-            <td>*********</td>  
-            {% if session['uid'] ==  user.id  %}
-                <form action="/edit_page">
-                    <td><input class="btn btn-info" type="submit" value="Edit"></td>
-                </form>
-            {% endif %}
-        </tbody>
-        <thead>
-            <tr>
-                <th>Event</th>
-                <th>Location</th>
-                <th>Time</th>
-                <th>Date</th>
-            </tr>
-        {% for user_event in user_events %}
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Edit Information</th>
+                </tr>
+            </thead>
             <tbody>
-                <td>{{ user_event.event_title }}</td>
-                <td>{{ user_event.location }}</td>
-                <td>{{ user_event.time }}</td>
-                <td>{{ user_event.date }}</td>
+                <td>{{ user.first_name }}  {{ user.last_name }}</td>
+                <td>{{ user.email }}</td>
+                <td>*********</td>  
+                {% if session['uid'] ==  user.id  %}
+                    <form action="/edit_page">
+                        <td><input class="btn btn-info" type="submit" value="Edit"></td>
+                    </form>
+                {% endif %}
             </tbody>
-        {% endfor %}   
-        </thead>
-
+            <thead>
+                <tr>
+                    <th>Event</th>
+                    <th>Location</th>
+                    <th>Time</th>
+                    <th>Date</th>
+                </tr>
+            {% for user_event in user_events %}
+                <tbody>
+                    <td>{{ user_event.event_title }}</td>
+                    <td>{{ user_event.location }}</td>
+                    <td>{{ user_event.time }}</td>
+                    <td>{{ user_event.date }}</td>
+                </tbody>
+            {% endfor %}   
+            </thead>
+        </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>

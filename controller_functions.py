@@ -211,7 +211,7 @@ def search():
     return render_template("search.html")
 
 def user_pg(id):
-    id = request.form['uid']
+    
     user_info = User.query.get(id)
     user_event = user_info.users_that_attend_events.all()
     return render_template("user_info.html", user= user_info, user_events = user_event)
@@ -248,4 +248,4 @@ def edit_user():
         user_info.password = pw_hash
         db.session.commit()
         
-    return redirect("/user_page/<id>")
+    return redirect("/user_page/" + request.form['uid'])
