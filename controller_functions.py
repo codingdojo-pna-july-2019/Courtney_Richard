@@ -211,6 +211,7 @@ def search():
     return render_template("search.html")
 
 def user_pg(id):
+    id = request.form['uid']
     user_info = User.query.get(id)
     user_event = user_info.users_that_attend_events.all()
     return render_template("user_info.html", user= user_info, user_events = user_event)
@@ -239,13 +240,12 @@ def edit_user():
         flash("Passwords need to match")
 
     if is_valid:
+        user_info = User.query.get(session['uid'])
         pw_hash = bcrypt.generate_password_hash(request.form['password'])
-        instance_of_user = User(first_name = request.form['fname'],
-                                last_name = request.form['lname'],
-                                email = request.form['email'], 
-                                password = pw_hash)
-        
-        update(instance_of_user).where(User.id == session['uid'])
+        user_info.first_name = request.form['fname']
+        user_info.last_name = request.form['lname']
+        user_info.email = request.form['email']
+        user_info.password = pw_hash
         db.session.commit()
-
-    return redirect("/edit_page" )
+        
+    return redirect("/user_page/<id>")

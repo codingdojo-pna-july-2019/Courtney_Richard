@@ -64,9 +64,10 @@
                     <input class="form-control" type="password" name="confirm_pass" placeholder="password?" id="password">
                 </div>
                 <div class="row justify-content-center">
+                    <input type="hidden" name="uid" value="{{session['uid']}}">
                     <input type="submit" class="btn btn-info" id="showError" value="Register">
                 </div>
             </form>
         </div>
 </body>
-</html>
+</html> 
