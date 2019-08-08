@@ -9,3 +9,7 @@ p, th, td, ul {
     font-family: 'Mali', cursive;
     padding: 5px;
 }
+
+.w-40 ml-5{
+    width: 800px;
+}
