@@ -1,0 +1,33 @@
+
+
+sudo vim /etc/systemd/system/Courtney_Richard_Project.service
+
+[Unit]
+Description=Gunicorn instance to serve Courtney_Richard
+After=network.target
+[Service]
+User=rich
+Group=www-data
+WorkingDirectory=/home/rich/Courtney_Richard
+Environment="PATH=/home/rich/Courtney_Richard/venv/bin"
+ExecStart=/home/rich/Courtney_Richard/venv/bin/gunicorn --workers 3 --bind unix:Courtney_Richard.sock -m 007 wsgi:application
+[Install]
+WantedBy=multi-user.target
+
+
+sudo systemctl start Courtney_Richard
+sudo systemctl enable Courtney_Richard
+
+
+sudo vim /etc/nginx/sites-available/Courtney_Richard
+
+server {
+    listen 80;
+    server_name 13.59.55.134;
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/rich/Courtney_Richard/Courtney_Richard.sock;
+    }
+}
+
+sudo ln -s /etc/nginx/sites-available/Courtney_Richard /etc/nginx/sites-enabled
